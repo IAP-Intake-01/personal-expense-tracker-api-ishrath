@@ -1,19 +1,12 @@
-import express, { json } from 'express';
+
+import express from 'express';
+import exampleRoute from './routes/exampleRoute.js';
+
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Define the port
-// eslint-disable-next-line no-undef
-const port = process.env.PORT || 3000;
+app.use('/api', exampleRoute);
 
-// Middleware (optional, but commonly used)
-app.use(json());
-
-// Basic route
-app.get('/', (req, res) => {
-  res.send('M World!');
-});
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
