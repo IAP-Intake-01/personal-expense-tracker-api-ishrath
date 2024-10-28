@@ -22,3 +22,5 @@ node_modules/
 # Build directories
 build/
 dist/
+
+eslint.config.mjs
