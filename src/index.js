@@ -1,11 +1,12 @@
-const express = require('express');
+import express, { json } from 'express';
 const app = express();
 
 // Define the port
+// eslint-disable-next-line no-undef
 const port = process.env.PORT || 3000;
 
 // Middleware (optional, but commonly used)
-app.use(express.json());
+app.use(json());
 
 // Basic route
 app.get('/', (req, res) => {
