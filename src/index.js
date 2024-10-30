@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+//can access these in other places as well and acees from process.env.NAME
 
 import express from 'express';
 import exampleRoute from './routes/exampleRoute.js';

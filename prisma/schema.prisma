@@ -1,6 +1,7 @@
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+  //url: process.env.DATABASE_URL
 }
 
 generator client {
@@ -14,6 +15,85 @@ model Example {
   name  String
   email String  @unique
 }
+
+/////////////////////////////
+
+model User {
+  id Int @id @default(autoincrement())
+  name String?
+  email String @unique
+  passwordHash String @unique
+  createdAt DateTime @default(now())
+
+  transactions Transaction[]
+  categories Category[]
+  budgets Budget[]
+
+}
+
+model Category {
+  id Int @id @default(autoincrement())
+
+  name String
+  type Type
+
+  budgets Budget[]
+  transactions Transaction[]
+
+  userId Int 
+  user User @relation( fields:[userId], references:[id])
+}
+
+model Transaction {
+  id Int @id @default(autoincrement())
+
+  amount Decimal 
+  description String?
+  date DateTime
+  type Type
+  createdAt DateTime @default(now())
+
+  userId Int
+  user User @relation(fields:[userId], references:[id])
+
+  categoryId Int
+  category Category @relation(fields[categoryId], references:[id])
+
+
+}
+
+model Budget {
+  id Int @id @default(autoincrement())
+
+  amount Decimal
+  startDate DateTime
+  endDate DateTime
+  availableAmount Decimal
+
+  userId Int
+  user User @relation(fields:[userId], references:[id])
+
+  categoryId Int
+  category Category @relation(fields[categoryId], references:[id])
+}
+
+enum Type {
+  income 
+  expense
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
